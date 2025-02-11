@@ -1,5 +1,4 @@
-import utils.control_screen as cc
-
+import module.utils.control_screen as cc
 
 mError = 'caracter invalid'             #mensaje generico
 """**************************************************************************************************************"""

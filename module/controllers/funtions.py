@@ -1,14 +1,18 @@
-import utils.control_screen as cc , utils.validate_data as vd
-import module.ui.menu as mm
 
-ERROR = 'option invalid'
+import module.utils.control_screen as cc
+import module.utils.validate_data as vd
+import module.ui.menu as mm
+from module.create_json.file_json import crearLibrary
+from main import ERROR
+
+
 
 def register ():
     print(mm.add_element)
-    option = int(vd.validateInt(f'Selecciona una opción ⏩' ))
+    option = int(vd.validateInt(f'Selecciona una opción ⏩  ' ))
     match option:
         case 1 :
-            pass
+            crearLibrary()
         case 2 :
             pass
         case 3 :
@@ -19,23 +23,20 @@ def register ():
         case _:
             print(ERROR)
 
-def library ():
-    cc.deleteScreen()
-    libro = vd.validateAlnum(f'Escriba el nombre del libro ')
-    autor = vd.validateAlpha(f'Escriba el nombre del autor de {libro} ')
-    genero =vd.validateAlpha(f'Escriba el nombre del genero de {libro} ')
-    valoracion = int(vd.validateInt(f'Escriba el nombre del autor {libro} '))
 
-def music ():
-    cc.deleteScreen()
-    cancion = vd.validateAlnum(f'Escriba el nombre del cancion ')
-    autor = vd.validateAlpha(f'Escriba el nombre del autor de {cancion} ')
-    genero =vd.validateAlpha(f'Escriba el nombre del genero de {cancion} ')
-    valoracion = int(vd.validateInt(f'Escriba el nombre del autor {cancion} '))
     
-def movie ():
-    cc.deleteScreen()
-    pelicula = vd.validateAlnum(f'Escriba el nombre del pelicula ')
-    autor = vd.validateAlpha(f'Escriba el nombre del autor de {pelicula} ')
-    genero =vd.validateAlpha(f'Escriba el nombre del genero de {pelicula} ')
-    valoracion = int(vd.validateInt(f'Escriba el nombre del autor {pelicula} '))   
+
+# from modules.utils.controlScreen import deleteScreen as clean, pauseScreen as pause 
+# from modules.creacionJson.archivosJson import crearJson, leerJson, actualizarJson, guardarDict
+# def crearTeam()->None:
+#     clean()
+#     crearJson('coleccion.json')
+#     coleccionJson=leerJson('coleccion.json')
+#     Libros={
+#         "libro":{
+#         },
+#     }
+#     clean()
+#     nlibro=str(input(f'Ingrese el nombre del libro: '))
+#     coleccionJson.update({Libros:["libro"]:nlibro})
+#     actualizarJson('coleccion.json', coleccionJson)

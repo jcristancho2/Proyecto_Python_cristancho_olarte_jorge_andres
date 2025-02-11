@@ -5,35 +5,49 @@ nombre : collection_organizer
 descripcion: 
 """
 import os
-import utils.control_screen as cc , utils.validate_data as vd
+import module.utils.control_screen as cc
+import module.utils.validate_data as vd
 import module.ui.menu as mm
-DESTINO = os.path.join('data/','organizer.json')
+# import module.create_json.file_json as 
+#from module.controllers.funtions import register
+import module.controllers.funtions as ff
 ERROR = 'option invalid'
 
 def menu ():
+    
     cc.deleteScreen()
     print(mm.admin_collection)
-    option = int(vd.validateInt(f'Selecciona una opción ⏩' ))
+    option = int(vd.validateInt(f'Selecciona una opción ⏩  ' ))
     match option:
         case 1 :
-            pass
+            cc.deleteScreen()
+            ff.register()
         case 2 :
-            pass
+            cc.deleteScreen()
+            print(mm.view_element)
         case 3 :
-            pass
+            cc.deleteScreen()
+            print(mm.search_elementhe)
         case 4 :
-            pass
+            cc.deleteScreen()
+            print(mm.edit_element)
         case 5 :
-            pass
+            cc.deleteScreen()
+            print(mm.delete_element)
         case 6 :
-            pass
+            cc.deleteScreen()
+            print(mm.view_element_category)
         case 7 :
-            pass
+            cc.deleteScreen()
+            print(mm.save_load_elementsave_)
         case 8 :
-            pass
+            cc.deleteScreen()
+            exit
         case _:
+            cc.deleteScreen()
             print(ERROR)
     
 
 if __name__=='__main__':
     menu()
+
