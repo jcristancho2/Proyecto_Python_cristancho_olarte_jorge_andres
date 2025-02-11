@@ -8,38 +8,31 @@ import os
 import module.utils.control_screen as cc
 import module.utils.validate_data as vd
 import module.ui.menu as mm
-# import module.create_json.file_json as 
-#from module.controllers.funtions import register
-import module.controllers.funtions as ff
+import module.controllers.funtions as f
+import module.create_json.file_json as fj
+
+NAME = os.path.join('data/','organizador.json')
 ERROR = 'option invalid'
 
 def menu ():
-    
     cc.deleteScreen()
     print(mm.admin_collection)
     option = int(vd.validateInt(f'Selecciona una opción ⏩  ' ))
     match option:
         case 1 :
-            cc.deleteScreen()
-            ff.register()
+            f.register()
         case 2 :
-            cc.deleteScreen()
-            print(mm.view_element)
+            f.view_elements()            
         case 3 :
-            cc.deleteScreen()
-            print(mm.search_elementhe)
+            f.search_element()
         case 4 :
-            cc.deleteScreen()
-            print(mm.edit_element)
+            f.edit_element()
         case 5 :
-            cc.deleteScreen()
-            print(mm.delete_element)
+            f.delete_element()
         case 6 :
-            cc.deleteScreen()
-            print(mm.view_element_category)
+            f.view_element_category()
         case 7 :
-            cc.deleteScreen()
-            print(mm.save_load_elementsave_)
+            f.save_load_element()
         case 8 :
             cc.deleteScreen()
             exit

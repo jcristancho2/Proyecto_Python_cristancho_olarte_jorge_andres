@@ -1,66 +1,69 @@
-
 import os
 import json
-from typing import Dict, List, Optional
-import module.utils.control_screen as cc
-import module.utils.validate_data as vd
+from typing import Dict, List, Optional 
+from main import NAME
 
-from utils.control_screen import deleteScreen as clean, pauseScreen as pause 
-from module.create_json.archivosJson import crearJson, leerJson, actualizarJson, guardarDict
+def read_json(file_path: str) -> Dict:
+    """Lee y retorna el contenido del archivo JSON"""
+    try:
+        with open(file_path, "r", encoding='utf-8') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
-data = {"libros": [], "musica": [], "peliculas": []}
+def write_json(file_path: str, data: Dict) -> None:
+    """Escribe datos en el archivo JSON"""
+    with open(file_path, "w", encoding='utf-8') as file:
+        json.dump(data, file, indent=4)
 
-def crearLibrary()->None:
-    clean()
-    crearJson('coleccion.json')
-    coleccionJson=leerJson('coleccion.json')
-    Libros={
-        "libro":{
-        },
-    }
-    clean()
-    nlibro=str(input('Ingrese el nombre del libro: '))
-    coleccionJson.update({Libros["libro"]:nlibro})
-    actualizarJson('coleccion.json', coleccionJson)
-
-def library ():
-    cc.deleteScreen()
-    libro = vd.validateAlnum(f'Escriba el nombre del libro ')
-    autor = vd.validateAlpha(f'Escriba el nombre del autor de {libro} ')
-    genero =vd.validateAlpha(f'Escriba el nombre del genero de {libro} ')
-    valoracion = int(vd.validateInt(f'Escriba el nombre del autor {libro} '))
+def update_json(file_path: str, data: Dict, path: Optional[List[str]] = None) -> None:
+    """
+    Actualiza datos en el JSON, opcionalmente en una ruta específica
+    Ejemplo: update_json('db.json', {'nuevo': 'dato'}, ['ruta', 'subruta'])
+    """
+    current_data = read_json(file_path)
     
-    data["libros"].append({
-        "titulo": libro,
-        "autor": autor,
-        "genero": genero,
-        "valoracion": valoracion
-    })
+    if not path:
+        current_data.update(data)
+    else:
+        current = current_data
+        for key in path[:-1]:
+            current = current.setdefault(key, {})
+        if path:
+            current.setdefault(path[-1], {}).update(data)
 
-def music ():
-    cc.deleteScreen()
-    cancion = vd.validateAlnum(f'Escriba el nombre del cancion ')
-    autor = vd.validateAlpha(f'Escriba el nombre del autor de {cancion} ')
-    genero =vd.validateAlpha(f'Escriba el nombre del genero de {cancion} ')
-    valoracion = int(vd.validateInt(f'Escriba el nombre del autor {cancion} '))
-    
-    data["musica"].append({
-        "titulo": cancion,
-        "autor": autor,
-        "genero": genero,
-        "valoracion": valoracion
-    })
-    
-def movie ():
-    cc.deleteScreen()
-    pelicula = vd.validateAlnum(f'Escriba el nombre del pelicula ')
-    autor = vd.validateAlpha(f'Escriba el nombre del autor de {pelicula} ')
-    genero =vd.validateAlpha(f'Escriba el nombre del genero de {pelicula} ')
-    valoracion = int(vd.validateInt(f'Escriba el nombre del autor {pelicula} '))
-    
-    data["peliculas"].append({
-        "titulo": pelicula,
-        "autor": autor,
-        "genero": genero,
-        "valoracion": valoracion
-    })
+    write_json(file_path, current_data)
+
+def delete_json(file_path: str, path: List[str]) -> bool:
+    """
+    Elimina datos en la ruta especificada
+    Retorna True si se eliminó exitosamente
+    """
+    data = read_json(file_path)
+    current = data
+
+    for key in path[:-1]:
+        if key not in current:
+            return False
+        current = current[key]
+
+    if path and path[-1] in current:
+        del current[path[-1]]
+        write_json(file_path, data)
+        return True
+    return False
+
+def initialize_json(NAME: str, initial_structure: Dict) -> None:
+    """
+    Inicializa el archivo con una estructura base si no existe
+    """
+    if not os.path.isfile(NAME):
+        write_json(NAME, initial_structure)
+    else:
+        current_data = read_json(NAME)
+        for key, value in initial_structure.items():
+            if key not in current_data:
+                current_data[key] = value
+        write_json(NAME, current_data)
+
+
