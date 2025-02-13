@@ -1,0 +1,16 @@
+{
+    "heavy is the crown": {
+        "id": 159159,
+        "titulo": "heavy is the crown",
+        "autor": "likin park",
+        "genero": "rock",
+        "valoracion": 5.0
+    },
+    "Getsemani": {
+        "id": 123456,
+        "titulo": "wrthwrt",
+        "autor": "moi",
+        "genero": "juum",
+        "valoracion": 5.0
+    }
+}

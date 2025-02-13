@@ -1,4 +1,4 @@
-import module.utils.control_screen as cc
+from module.utils import control_screen as cc
 
 mError = 'caracter invalid'             #mensaje generico
 """**************************************************************************************************************"""
@@ -8,7 +8,7 @@ def validateInt(msg: str)-> int:        #validacion de enteros // usar para edad
             return int(input(msg))      # muestra el mensaje y espera al usuario
         except ValueError:
             print(mError)               # impresion del error si falla
-            cc.pause_screen()           # pausa de la pantalla
+            cc.pauseScreen()           # pausa de la pantalla
 
 def validatefloat(msg:str) -> float:    #validacion de flotantes // usar para datos decimales
     while True:
@@ -16,7 +16,7 @@ def validatefloat(msg:str) -> float:    #validacion de flotantes // usar para da
             return float(input(msg))    # muestra el mensaje y espera al usuario
         except ValueError:
             print(mError)               # impresion del error si falla
-            cc.pause_screen()           # pausa de la pantalla
+            cc.pauseScreen()           # pausa de la pantalla
 
 def validateAlpha(msg: str) -> str:     #validacion de textos sin numeros // uso para palabras 
     while True:
@@ -25,7 +25,7 @@ def validateAlpha(msg: str) -> str:     #validacion de textos sin numeros // uso
             return x                    #retorna el texto valido
         else:
             print(mError)               #impresion del error si falla
-            cc.pause_screen()           #pausa de la pantalla
+            cc.pauseScreen()           #pausa de la pantalla
             
 def validateAlnum(msg: str) -> str:     #valida datos alfanumericos // usar para direcciones sin caracter especial
     while True:
@@ -34,7 +34,7 @@ def validateAlnum(msg: str) -> str:     #valida datos alfanumericos // usar para
             return x                    #retorna el texto valido
         else:
             print(mError)               #impresion del error si falla
-            cc.pause_screen()           #pausa de la pantalla
+            cc.pauseScreen()           #pausa de la pantalla
 
 def validateDigit(msg: str) -> str:     ##valida datos alfanumericos // usar para direcciones sin caracter especial
     while True:
@@ -43,4 +43,4 @@ def validateDigit(msg: str) -> str:     ##valida datos alfanumericos // usar par
             return x                    #retorna el texto valido
         else:
             print(mError)               #impresion del error si falla
-            cc.pause_screen()           #pausa de la pantalla
+            cc.pauseScreen()           #pausa de la pantalla
